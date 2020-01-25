@@ -1,5 +1,21 @@
 import os
 from classes import image, satellite, collection
+from typing import List
+
+def readInput(filename: str) -> List:
+    lines = []
+    with open(filename, 'r') as f:
+        for line in f:
+            lines.append(line.strip())
+    return lines
+
+def parseLines(lines: List):
+    T = int(lines[0])
+    S = int(lines[1])
+    satellites = []
+    for i in range(S):
+        satellites.append(satellite.Satellite(*lines[2 + i].split()))
+    return T, S, satellites
 
 # class Driver:
 #     def __init__(self, tot_time, satellites, collections)
@@ -15,8 +31,6 @@ from classes import image, satellite, collection
 #         2   2 or 3
 
 #     '''
-
-
 
 def setup():
     tot_time = 3600
@@ -56,3 +70,5 @@ def setup():
 
 
 if __name__ == "__main__":
+    lines = readInput('./input/constellation.in')
+    T, S, satellites = parseLines(lines)
