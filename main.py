@@ -34,15 +34,15 @@ def parseLines(lines: List):
 
 def setup():
     tot_time = 3600
-    google_paris = Images(175958, 8387, [0, 3599])
-    collection_1 = Collection(100, [google_paris])
+    google_paris = image.Image(175958, 8387, [[0, 3599]])
+    collection_1 = collection.Collection(100, [google_paris])
 
-    eiffel = Images(175889, 8260, [[0, 900], [2700, 3599]])
-    collection_2 = Collection(100, [eiffel])
+    eiffel = image.Image(175889, 8260, [[0, 900], [2700, 3599]])
+    collection_2 = collection.Collection(100, [eiffel])
 
-    google_paris = Images(175958, 8387, [3300, 3599])
-    eiffel = Images(175889, 8260, [[0, 900], [3300, 3599]])
-    collection_3 = Collection(300, [google_paris, eiffel])
+    google_paris = image.Image(175958, 8387, [[3300, 3599]])
+    eiffel = image.Image(175889, 8260, [[0, 900], [3300, 3599]])
+    collection_3 = collection.Collection(300, [google_paris, eiffel])
 
 
     '''
@@ -72,3 +72,4 @@ def setup():
 if __name__ == "__main__":
     lines = readInput('./input/constellation.in')
     T, S, satellites = parseLines(lines)
+    print(satellites[0])
