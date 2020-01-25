@@ -1,4 +1,4 @@
-class Images:
+class Image:
     def __init__(self, lat, long, times):
         self.lat = lat
         self.long = long
