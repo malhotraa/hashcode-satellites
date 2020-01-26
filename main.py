@@ -1,6 +1,7 @@
 import os
 from classes import image, satellite, collection, position
 from typing import List
+from collections import defaultdict
 
 def readInput(filename: str) -> List:
     lines = []
@@ -38,8 +39,11 @@ def parseLines(lines: List):
             col.add_time(start, end)
             i += 1
 
-        col.add_image(image)
+        col.update_image_times()
+
+        # col.add_image(image)
         collections.append(col)
+        print(f"complated collection {curr_collection} of {num_collections}")
         curr_collection+= 1
     return T, S, satellites, collections
 
@@ -59,18 +63,6 @@ def parseLines(lines: List):
 #     '''
 
 def setup():
-    tot_time = 3600
-    google_paris = image.Image(175958, 8387, [[0, 3599]])
-    collection_1 = collection.Collection(100, [google_paris])
-
-    eiffel = image.Image(175889, 8260, [[0, 900], [2700, 3599]])
-    collection_2 = collection.Collection(100, [eiffel])
-
-    google_paris = image.Image(175958, 8387, [[3300, 3599]])
-    eiffel = image.Image(175889, 8260, [[0, 900], [3300, 3599]])
-    collection_3 = collection.Collection(300, [google_paris, eiffel])
-
-
     '''
     0 - all posstible paths of a satellite and also all posible paths of all satt [malhot]
 
@@ -98,6 +90,7 @@ def setup():
 if __name__ == "__main__":
     lines = readInput('./input/given_sample.in')
     # lines = readInput('./input/constellation.in')
+    # lines = readInput('./input/forever_alone.in')
     T, S, satellites, collections = parseLines(lines)
     print("Calculating paths for {} satellites over {} timesteps.".format(S, T))
 
@@ -116,7 +109,16 @@ if __name__ == "__main__":
     print(f"Sample position: {list(positions)[0]}")
 
 
-    print("---------------")
-    for collection in collections:
-        print(collection.lowest_time, collection.higest_time)
+    print("-------collection joins--------")
+    img_dict = defaultdict(set)
+    for col in collections:
+
+        for img in col.images:
+            for t in img.get_times():
+                img_dict[hash(img)].add(t)
+
+    for i in img_dict.keys():
+        print(i, len(img_dict[i]))
+
+
 
