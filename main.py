@@ -13,9 +13,35 @@ def parseLines(lines: List):
     T = int(lines[0])
     S = int(lines[1])
     satellites = []
+    collections = []
     for i in range(S):
         satellites.append(satellite.Satellite(*lines[2 + i].split()))
-    return T, S, satellites
+
+    i = S+2
+    num_collections = int(lines[i])
+    curr_collection = 0
+    collections = []
+    i += 1
+    while curr_collection < num_collections:
+        points, num_images, num_times = list(map(int, lines[i].split()))
+        i+=1
+        col = collection.Collection(points)
+        for img in range(num_images):
+            lat, long = list(map(int, lines[i].split()))
+            i += 1
+            col.add_image(image.Image(lat, long))
+
+        times = []
+        for time in range(num_times):
+            start, end = list(map(int, lines[i].split()))
+            # times.append((start, end))
+            col.add_time(start, end)
+            i += 1
+
+        col.add_image(image)
+        collections.append(col)
+        curr_collection+= 1
+    return T, S, satellites, collections
 
 # class Driver:
 #     def __init__(self, tot_time, satellites, collections)
@@ -71,5 +97,11 @@ def setup():
 
 if __name__ == "__main__":
     lines = readInput('./input/constellation.in')
-    T, S, satellites = parseLines(lines)
-    print(satellites[0])
+    # lines = readInput('./input/given_sample.in')
+    T, S, satellites, collections = parseLines(lines)
+    # print(satellites[0])
+
+
+    for collection in collections:
+        print(collection.lowest_time, collection.higest_time)
+
