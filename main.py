@@ -86,3 +86,4 @@ if __name__ == "__main__":
         print(f"Done calculating positions for satellite {s}")
 
     print(f"Calculated {len(positions)} unique positions.")
+    print(f"Sample position: {list(positions)[0]}")
