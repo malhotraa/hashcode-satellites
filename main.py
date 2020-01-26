@@ -121,4 +121,15 @@ if __name__ == "__main__":
         print(i, len(img_dict[i]))
 
 
+    print("-----------run simulation-------")
+    for t in range(0, T):
+        # check check if there is a match between satellite(s) and image
+        # update collection indicating that the image has been captured
+
+    ## calculate total score
+    # sudo code:
+    # for collection in collections
+    #   if all images are captured, then add to total score
+
+
 
