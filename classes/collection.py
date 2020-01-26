@@ -16,6 +16,7 @@ class Collection:
         self.higest_time = max(ub, self.higest_time)
         self.possible_times.add((lb, ub))
 
+
     def update_image_times(self):
         for t in self.possible_times:
             lb, ub = t

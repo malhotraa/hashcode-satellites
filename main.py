@@ -39,7 +39,7 @@ def parseLines(lines: List):
             col.add_time(start, end)
             i += 1
 
-        col.update_image_times()
+        # col.update_image_times()
 
         # col.add_image(image)
         collections.append(col)
@@ -83,13 +83,18 @@ def setup():
     2 -
 
 
+    google office(lat, long): (t=0, t=1, t=4, t=3999)
+    effiel(lat, long): (t=3, t=10, t=40, t=39)
+
+
+
     '''
 
 
 
 if __name__ == "__main__":
     lines = readInput('./input/given_sample.in')
-    # lines = readInput('./input/constellation.in')
+    lines = readInput('./input/constellation.in')
     # lines = readInput('./input/forever_alone.in')
     T, S, satellites, collections = parseLines(lines)
     print("Calculating paths for {} satellites over {} timesteps.".format(S, T))
@@ -122,7 +127,7 @@ if __name__ == "__main__":
 
 
     print("-----------run simulation-------")
-    for t in range(0, T):
+    # for t in range(0, T):
         # check check if there is a match between satellite(s) and image
         # update collection indicating that the image has been captured
 
