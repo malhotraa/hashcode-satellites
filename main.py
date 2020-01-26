@@ -1,5 +1,5 @@
 import os
-from classes import image, satellite, collection
+from classes import image, satellite, collection, position
 from typing import List
 
 def readInput(filename: str) -> List:
@@ -72,4 +72,17 @@ def setup():
 if __name__ == "__main__":
     lines = readInput('./input/constellation.in')
     T, S, satellites = parseLines(lines)
-    print(satellites[0])
+    print("Calculating paths for {} satellites over {} timesteps.".format(S, T))
+
+    positions = set()
+    for s in range(S):
+        positions.add(satellites[s].current_position())
+        # print(f"Satellite {s} at time 0: {satellites[s].current_position()}")
+
+        for t in range(1, T):
+            position_t = satellites[s].next_position()
+            positions.add(position_t)
+            # print(f"Satellite {s} at time {t}: {position_t}")
+        print(f"Done calculating positions for satellite {s}")
+
+    print(f"Calculated {len(positions)} unique positions.")
